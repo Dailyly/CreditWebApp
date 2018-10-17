@@ -23,22 +23,26 @@ export default new Router({
         {
           path: '/credit',
           component: Credit,
-          name: 'Credit'
+          name: 'Credit',
+          meta: { key: 0 }
         },
         {
           path: '/loan',
           component: Loan,
-          name: 'Loan'
+          name: 'Loan',
+          meta: { key: 1 }
         },
         {
-          path: '/loan',
+          path: '/member',
           component: Member,
-          name: 'Member'
+          name: 'Member',
+          meta: { key: 2 }
         },
         {
           path: '/user',
           component: User,
-          name: 'User'
+          name: 'User',
+          meta: { key: 3 }
         }
       ]
     },

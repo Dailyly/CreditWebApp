@@ -18,22 +18,26 @@
           {
             icon: 'icon-idcard',
             text: '信用卡',
-            key: 'Credit'
+            key: 0,
+            path: 'credit'
           },
           {
             icon: 'icon-loan',
             text: '贷款',
-            key: 'Loan'
+            key: 1,
+            path: 'loan'
           },
           {
             icon: 'icon-vip',
             text: '会员',
-            key: 'Member'
+            key: 2,
+            path: 'member'
           },
           {
             icon: 'icon-man',
             text: '我的',
-            key: 'User'
+            key: 3,
+            path: 'user'
           }
         ]
       }

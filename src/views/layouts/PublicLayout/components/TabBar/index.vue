@@ -4,7 +4,7 @@
       v-for="(item, index) in handleItems"
       :key="index"
       :class="{active: item.active}"
-      @click="changeTabbar(item.key)"
+      @click="changeTabbar(item.path)"
     >
       <div class="tab-bar-item__icon">
         <i class="iconfont" :class="item.icon"></i>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
   const defaultStyle = {
     width: '100%',
     height: '1rem'
@@ -40,10 +41,12 @@
         return Object.assign(defaultStyle, this.options)
       },
       handleItems () {
-        const {items, $route: {name}} = this
-        return Object.assign([],items).forEach( item => {
-           item.active = name === item.key
+        const {items, $route: {meta: {key}}} = this
+        let arr = _.cloneDeep(items)
+        arr.forEach( item => {
+           item.active = key === item.key
         })
+        return arr
       }
     },
     watch: {
@@ -52,8 +55,8 @@
       }
     },
     methods: {
-      changeTabbar (e) {
-        console.log(e.target, '大大大')
+      changeTabbar (path) {
+        this.$router.push(path)
       }
     }
   }
@@ -72,9 +75,6 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    .active{
-      color: blue;
-    }
     &__icon{
       .iconfont{
         font-size: .5rem;
@@ -83,6 +83,9 @@
     &__text{
       font-size: .2rem;
     }
+  }
+  .active{
+    color: orange;
   }
 }
 </style>
