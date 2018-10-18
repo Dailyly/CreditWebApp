@@ -7,6 +7,7 @@ import Credit from './views/pages/Credit'
 import Loan from './views/pages/Loan'
 import Member from './views/pages/Member'
 import User from './views/pages/User'
+import Login from './views/pages/Login'
 
 Vue.use(Router)
 
@@ -21,31 +22,17 @@ export default new Router({
       component: PublicLayout,
       children: [
         {
-          path: '/credit',
-          component: Credit,
-          name: 'Credit',
-          meta: { key: 0 }
+          path: '/credit', component: Credit, name: 'Credit', meta: { key: 0 }
         },
-        {
-          path: '/loan',
-          component: Loan,
-          name: 'Loan',
-          meta: { key: 1 }
+        { path: '/loan', component: Loan, name: 'Loan', meta: { key: 1 }
         },
-        {
-          path: '/member',
-          component: Member,
-          name: 'Member',
-          meta: { key: 2 }
+        { path: '/member', component: Member, name: 'Member', meta: { key: 2 }
         },
-        {
-          path: '/user',
-          component: User,
-          name: 'User',
-          meta: { key: 3 }
+        { path: '/user', component: User, name: 'User', meta: { key: 3 }
         }
       ]
     },
+    { path: '/login', component: Login, name: 'Login' },
     {
       path: '/',
       name: 'home',
