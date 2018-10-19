@@ -29,8 +29,13 @@
               <div class="form-field__icon" @click="clearInput('code')" :class="{active: code.value && code.show}">
                 <i class="iconfont icon-clear"></i>
               </div>
-              <div class="form-field__button">
-                <button @click="sendCode">{{code.msg}}</button>
+              <div class="form-field__button" :class="{'form-field__disabled': code.msg != '获取验证码'}">
+                <button 
+                  @click="handleSendCode"
+                  :disabled="code.msg != '获取验证码'"
+                >
+                  {{code.msg}}
+                </button>
               </div>
             </div>
             <div class="form-field__errorMsg"  v-if="code.errMsg">{{code.errMsg}}</div>
@@ -42,10 +47,13 @@
         <button class="submit_content__button">完成</button>
       </div>
     </div>
+    <van-toast></van-toast>
   </div>
 </template>
 
 <script>
+
+  import {checkPhone} from '@/utils/validate'
   export default {
     name: 'Login',
     data () {
@@ -59,8 +67,9 @@
           value: '',
           show: true,
           errMsg: '',
-          msg: '发送验证码'
+          msg: '获取验证码'
         },
+        timeCount: 60
       }
     },
     computed: {
@@ -79,8 +88,24 @@
       clearInput (key) {
         this[key].value = ''
       },
+      handleSendCode () {
+        const {value} = this.phone
+        if (!checkPhone(value)) {
+          console.log(this)
+          this.$toast('请填写正确的手机号')
+          return
+        } 
+        this.sendCode()
+      },
       sendCode () {
-        
+        if (!this.timeCount) {
+          this.code.msg = '获取验证码'
+          this.timeCount = 60
+          return
+        }
+        this.code.msg = this.timeCount + 's后重新获取'
+        this.timeCount--
+        setTimeout(this.sendCode, 1000)
       }
     }
   }
@@ -138,12 +163,16 @@
     &__button{
       flex-shrink: 0;
       padding-left: .1rem;
+      opacity: 1;
       button{
         border: none;
         background: transparent;
         color: #007ACC;
         font-weight: 600;
       }
+    }
+    &__disabled{
+      opacity: 0.5;
     }
     &__errorMsg{
       color: #f44;

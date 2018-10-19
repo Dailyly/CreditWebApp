@@ -9,7 +9,6 @@ import fetchConfig from './config/apiConfig'
 
 Vue.use(Toast)
 Vue.use(smartFetch, fetchConfig)
-
 Vue.config.productionTip = false
 
 new Vue({

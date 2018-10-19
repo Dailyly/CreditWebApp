@@ -10,6 +10,7 @@
   "dependencies": {
     "js-cookie": "^2.2.0",
     "smartfetch": "^0.4.5",
+    "vant": "^1.3.8",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
