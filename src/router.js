@@ -8,6 +8,7 @@ import Loan from './views/pages/Loan'
 import Member from './views/pages/Member'
 import User from './views/pages/User'
 import Login from './views/pages/Login'
+import WxLogin from './views/pages/WxLogin'
 
 Vue.use(Router)
 
@@ -33,6 +34,7 @@ export default new Router({
       ]
     },
     { path: '/login', component: Login, name: 'Login' },
+    { path: '/wxlogin', component: WxLogin, name: 'WxLogin' },
     {
       path: '/',
       name: 'home',

@@ -1,11 +1,13 @@
 <template>
   <div class="login">
-    <h3>欢迎来到登录界面</h3>
     <div class="form">
       <div class="form__content">
         <div class="form-field">
           <div class="form-field__title">
             <span>手机号</span>
+          </div>
+          <div class="vertical-line">
+            <span></span>
           </div>
           <div class="form-field__value">
             <div class="form-field__body">
@@ -23,11 +25,17 @@
           <div class="form-field__title">
             <span>验证码</span>
           </div>
+          <div class="vertical-line">
+            <span></span>
+          </div>
           <div class="form-field__value">
             <div class="form-field__body">
               <input class="input" type="text" placeholder="请输入验证码" v-model="code.value"  @blur="code.show=false" @input="code.show=true" @focus="code.show=true">
               <div class="form-field__icon" @click="clearInput('code')" :class="{active: code.value && code.show}">
                 <i class="iconfont icon-clear"></i>
+              </div>
+              <div class="vertical-line">
+                <span></span>
               </div>
               <div class="form-field__button" :class="{'form-field__disabled': code.msg != '获取验证码'}">
                 <button 
@@ -41,7 +49,12 @@
             <div class="form-field__errorMsg"  v-if="code.errMsg">{{code.errMsg}}</div>
           </div>
         </div>
-
+      </div>
+      <div class="reg-protocol">
+        <input type="checkBox" v-model="checked">
+        <span class="reg-protocol__text">
+          我已阅读并同意<router-link to="/user" class="reg-protocol__link">《用户注册协议及隐私保护政策》</router-link>
+        </span>
       </div>
       <div class="submit_content">
         <button class="submit_content__button">完成</button>
@@ -52,7 +65,6 @@
 </template>
 
 <script>
-
   import {checkPhone} from '@/utils/validate'
   export default {
     name: 'Login',
@@ -69,7 +81,8 @@
           errMsg: '',
           msg: '获取验证码'
         },
-        timeCount: 60
+        timeCount: 60,
+        checked: false
       }
     },
     computed: {
@@ -113,38 +126,34 @@
 
 <style lang="scss" scoped>
 .login{
-  background: #c1c1c1;
+  width: 100%;
+  height: 100%;
+  background: #F5F5F5;
   display: flex;
   flex-direction: column;
-  h3{
-    text-align: center;
-    flex: 1;
-  }
   .form{
    flex: 1;
+   margin-top: 0.11rem;
   }
-  .form__content{
-      padding:.2rem;
-      background: #fff;
-      margin: .1rem 0;
-     
-    }
   .form-field{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    border-bottom: 1px solid #ccc;
+    background: #fff;
+    height: 0.98rem;
+    border-top: 0.01rem solid #EFEDEF;
+    border-bottom: 0.01rem solid #EFEDEF;
+    margin-top: 0.2rem;
     &__title{
-      max-width: 1.8rem;
-      flex: 1;
-      font-size: .35rem;
-      font-weight: 400;
-      line-height: .8rem;
+      width: 0.96rem;
+      font-size: .32rem;
+      color: #4A4A4A;
+      padding: 0 .3rem;
+      line-height: 0.98rem;
     }
     &__value{
       flex: 1;
-      font-size: .35rem;
-      line-height: .8rem;
+      font-size: .28rem;
       input{
         border: none;
         width: 100%;
@@ -155,20 +164,26 @@
     &__body{
       position: relative;
       display: flex;
+      height: 0.98rem;
     }
     &__icon{
       color: #ccc;
       opacity: 0;
+      padding-right: 0.2rem;
+      line-height: 0.98rem;
+      /* background: pink; */
+      font-size: 0.28rem;
     }
     &__button{
       flex-shrink: 0;
-      padding-left: .1rem;
       opacity: 1;
+      line-height: 0.98rem;
+      padding: 0 .15rem;
       button{
         border: none;
         background: transparent;
-        color: #007ACC;
-        font-weight: 600;
+        font-size: 0.32rem;
+        color: #8E6C2D;
       }
     }
     &__disabled{
@@ -183,32 +198,39 @@
     }
   }
   .submit_content{
-    margin-top: 2rem;
+    margin-top: 3.71rem;
     display: flex;
-    padding:0 .2rem;
+    padding:0 .7rem;
     &__button{
-      border: 1px solid transparent;
-      background-color: #f5f5f5;
-      color: #444;
-      position: relative;
-      display: inline-block;
-      margin: 0;
-      padding: 0 12px;
-      min-width: 52px;
-      min-height: 47px;
-      border-radius: 4px;
-      vertical-align: top;
-      text-align: center;
-      text-overflow: ellipsis;
-      font-size: 16px;
-      line-height: 42px;
-      cursor: pointer;
-      border-color: transparent;
-      background-color: #4a90e2;
+      width: 6.1rem;
+      height: 0.96rem;
+      line-height: 0.96rem;
+      font-size: 0.36rem;
       color: #fff;
-      flex: 1;
+      border-color: transparent;
+      background-color: #A99164;
+      border-radius: 0.12rem;
     }
 
+  }
+  .vertical-line{
+    line-height: 0.98rem;
+    span{
+      display: block;
+      border: 0.01rem solid red;
+      height: 0.4rem;
+    }
+  }
+  .reg-protocol{
+    margin-top: 0.45rem;
+    font-size: 0.24rem;
+    text-align: center;
+    &__text{
+      color: #4A4A4A;
+    }
+    &__link{
+      color: #A58B5A;
+    }
   }
 }
 </style>
